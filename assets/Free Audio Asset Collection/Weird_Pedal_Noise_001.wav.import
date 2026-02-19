@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://csikmsg6sfwnf"
+path="res://.godot/imported/Weird_Pedal_Noise_001.wav-01e63b1d442849cb2c7924ca2b12d115.sample"
+
+[deps]
+
+source_file="res://assets/Free Audio Asset Collection/Weird_Pedal_Noise_001.wav"
+dest_files=["res://.godot/imported/Weird_Pedal_Noise_001.wav-01e63b1d442849cb2c7924ca2b12d115.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

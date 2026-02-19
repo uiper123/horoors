@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ctnekp6qppjkb"
+path="res://.godot/imported/The_Absence_Of_Time.wav-6edf2b26b026ea3e35652f16136039d7.sample"
+
+[deps]
+
+source_file="res://assets/Free Audio Asset Collection/The_Absence_Of_Time.wav"
+dest_files=["res://.godot/imported/The_Absence_Of_Time.wav-6edf2b26b026ea3e35652f16136039d7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

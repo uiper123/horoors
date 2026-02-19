@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://gjiufu7oylo7"
+path="res://.godot/imported/Larger_Than_Life_Battle_Sequence.wav-a9c4282185822e3cc65e8ef056ba5edd.sample"
+
+[deps]
+
+source_file="res://assets/Free Audio Asset Collection/Larger_Than_Life_Battle_Sequence.wav"
+dest_files=["res://.godot/imported/Larger_Than_Life_Battle_Sequence.wav-a9c4282185822e3cc65e8ef056ba5edd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

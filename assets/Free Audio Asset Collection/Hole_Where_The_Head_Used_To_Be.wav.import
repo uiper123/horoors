@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxdyugpvcnejf"
+path="res://.godot/imported/Hole_Where_The_Head_Used_To_Be.wav-b9c3145e36d8dd24d4eba4250142cd8d.sample"
+
+[deps]
+
+source_file="res://assets/Free Audio Asset Collection/Hole_Where_The_Head_Used_To_Be.wav"
+dest_files=["res://.godot/imported/Hole_Where_The_Head_Used_To_Be.wav-b9c3145e36d8dd24d4eba4250142cd8d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

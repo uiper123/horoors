@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d33fhqcjoptj1"
+path="res://.godot/imported/Mud Footsteps (5).mp3-7e6353c279d827a4794ca805fd4454eb.mp3str"
+
+[deps]
+
+source_file="res://assets/Mud foosteps/Mud Footsteps (5).mp3"
+dest_files=["res://.godot/imported/Mud Footsteps (5).mp3-7e6353c279d827a4794ca805fd4454eb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

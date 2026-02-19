@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bbvold0m0355m"
+path="res://.godot/imported/Wind 3.wav-af5c7f7ce11d705b48ff6bf8e412b788.sample"
+
+[deps]
+
+source_file="res://assets/Free PSX Wind Ambience/Wind 3.wav"
+dest_files=["res://.godot/imported/Wind 3.wav-af5c7f7ce11d705b48ff6bf8e412b788.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

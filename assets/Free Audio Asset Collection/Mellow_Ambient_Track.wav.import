@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xt142xgui48d"
+path="res://.godot/imported/Mellow_Ambient_Track.wav-3973f1866900a693bad87981ba2f9458.sample"
+
+[deps]
+
+source_file="res://assets/Free Audio Asset Collection/Mellow_Ambient_Track.wav"
+dest_files=["res://.godot/imported/Mellow_Ambient_Track.wav-3973f1866900a693bad87981ba2f9458.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

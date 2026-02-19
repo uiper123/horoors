@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://co1pk3nju7kfh"
+path="res://.godot/imported/Ambient_Lingering_Action.wav-f40caf9243697b4d16781fea042af102.sample"
+
+[deps]
+
+source_file="res://assets/Free Audio Asset Collection/Ambient_Lingering_Action.wav"
+dest_files=["res://.godot/imported/Ambient_Lingering_Action.wav-f40caf9243697b4d16781fea042af102.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

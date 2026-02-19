@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://p3ghss1yuipr"
+path="res://.godot/imported/Lofi_Creepy_Theme.wav-d7ebda77b5e8c327878f6e98e4a8c966.sample"
+
+[deps]
+
+source_file="res://assets/Free Audio Asset Collection/Lofi_Creepy_Theme.wav"
+dest_files=["res://.godot/imported/Lofi_Creepy_Theme.wav-d7ebda77b5e8c327878f6e98e4a8c966.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

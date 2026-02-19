@@ -1,0 +1,151 @@
+[gd_scene load_steps=8 format=3]
+[ext_resource type="Script" path="res://scenes/lobby.gd" id="1_lobby"]
+[ext_resource type="Script" path="res://scenes/forest/forest_generator.gd" id="2_forgen"]
+
+[sub_resource type="StandardMaterial3D" id="Mat1"]
+albedo_color = Color(0.2, 0.6, 0.8, 1)
+
+[sub_resource type="CapsuleMesh" id="Mesh1"]
+material = SubResource("Mat1")
+radius = 0.45
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="Mat2"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+
+[sub_resource type="CapsuleMesh" id="Mesh2"]
+material = SubResource("Mat2")
+radius = 0.45
+height = 1.8
+
+[sub_resource type="Environment" id="Env"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.2, 0.2, 0.3, 1)
+fog_enabled = true
+fog_light_color = Color(0.1, 0.1, 0.15, 1)
+fog_density = 0.05
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_emission = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Lobby" type="Node3D"]
+script = ExtResource("1_lobby")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.7, -0.5, 0.5, 0, 0.7, 0.7, -0.7, -0.5, 0.5, 0, 10, 0)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(40, 1, 40)
+material = SubResource("Mat1")
+
+[node name="ForestGenerator" type="Node3D" parent="."]
+script = ExtResource("2_forgen")
+tree_count = 40
+area_size = 30.0
+
+[node name="Characters" type="Node3D" parent="."]
+
+[node name="Char1" type="MeshInstance3D" parent="Characters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 0)
+mesh = SubResource("Mesh1")
+
+[node name="Char2" type="MeshInstance3D" parent="Characters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 0)
+mesh = SubResource("Mesh2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.5, 4.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200
+offset_top = 80
+offset_right = 200
+offset_bottom = 150
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 48
+text = "The Survivor"
+horizontal_alignment = 1
+
+[node name="PrevButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 50
+offset_top = -30
+offset_right = 100
+offset_bottom = 30
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="NextButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -100
+offset_top = -30
+offset_right = -50
+offset_bottom = 30
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150
+offset_top = -120
+offset_right = 150
+offset_bottom = -50
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "START GAME"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+offset_left = 30
+offset_top = 30
+offset_right = 130
+offset_bottom = 70
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/Control/PrevButton" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/NextButton" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/StartButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/BackButton" to="." method="_on_back_pressed"]

@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://csf4s18kjscob"]
+
+[ext_resource type="Script" uid="uid://bi2cyqbv87g7x" path="res://scenes/test_world.gd" id="1_world"]
+[ext_resource type="PackedScene" path="res://entities/player/player.tscn" id="2_player"]
+[ext_resource type="Shader" uid="uid://dglauiivwrosi" path="res://ui/ps1_pp.gdshader" id="3_shader"]
+[ext_resource type="Script" uid="uid://bhowlgeqwhc0j" path="res://ui/network_ui.gd" id="4_netui"]
+[ext_resource type="Script" uid="uid://c7b36sjxdrobg" path="res://scenes/forest/forest_generator.gd" id="5_forest"]
+[ext_resource type="AudioStream" uid="uid://bbvold0m0355m" path="res://assets/Free PSX Wind Ambience/Wind 3.wav" id="6_wind"]
+[ext_resource type="AudioStream" uid="uid://dfnjmcwh5443h" path="res://assets/Fog In The Dollhouse.mp3" id="7_music"]
+[ext_resource type="PackedScene" path="res://ui/pause_menu.tscn" id="10_pause"]
+[ext_resource type="Texture2D" path="res://assets/Textures/Straw.jpg" id="ground_tex"]
+[ext_resource type="Shader" uid="uid://bhpq87xjaffx6" path="res://ui/ps1_static.gdshader" id="model_shader"]
+[ext_resource type="Texture2D" uid="uid://dktfo73fs3bny" path="res://assets/Cloudy Sky/Cloudy_Sky-Night_01-512x512.png" id="sky_tex"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sky"]
+panorama = ExtResource("sky_tex")
+
+[sub_resource type="Sky" id="Sky_forest"]
+sky_material = SubResource("PanoramaSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_forest"]
+background_mode = 2
+background_color = Color(0.02, 0.03, 0.04, 1)
+sky = SubResource("Sky_forest")
+ambient_light_source = 3
+ambient_light_color = Color(0.1, 0.1, 0.15, 1)
+fog_enabled = true
+fog_light_color = Color(0.05, 0.06, 0.08, 1)
+fog_density = 0.04
+fog_sky_affect = 0.5
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.06
+volumetric_fog_albedo = Color(0.1, 0.1, 0.1, 1)
+volumetric_fog_emission = Color(0.01, 0.01, 0.01, 1)
+volumetric_fog_emission_energy = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ground"]
+render_priority = 0
+shader = ExtResource("model_shader")
+shader_parameter/jitter = 0.5
+shader_parameter/affine_texture_mapping = true
+shader_parameter/resolution = Vector2(320, 240)
+shader_parameter/albedo_texture = ExtResource("ground_tex")
+shader_parameter/albedo_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/fog_start = 5.0
+shader_parameter/fog_end = 30.0
+shader_parameter/fog_color = Color(0.05, 0.06, 0.08, 1)
+shader_parameter/alpha_scissor = 0.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_clouds"]
+density = 0.05
+albedo = Color(0.2, 0.22, 0.25, 1)
+emission = Color(0.05, 0.05, 0.08, 1)
+height_falloff = 0.1
+edge_fade = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pp"]
+shader = ExtResource("3_shader")
+shader_parameter/color_depth = 15
+shader_parameter/dithering = true
+shader_parameter/resolution_scale = 1
+
+[node name="ForestLevel" type="Node3D" unique_id=1214830319]
+script = ExtResource("1_world")
+player_scene = ExtResource("2_player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1962358457]
+environment = SubResource("Environment_forest")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=814907698]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
+light_color = Color(0.6, 0.7, 0.9, 1)
+shadow_enabled = true
+
+[node name="Ground" type="CSGBox3D" parent="." unique_id=2097148307]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(200, 1, 200)
+material = SubResource("ShaderMaterial_ground")
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=2078881812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+size = Vector3(200, 10, 200)
+material = SubResource("FogMaterial_clouds")
+
+[node name="ForestGenerator" type="Node3D" parent="." unique_id=1229909641]
+script = ExtResource("5_forest")
+tree_count = 150
+
+[node name="AudioAmbience" type="Node" parent="." unique_id=2053012786]
+
+[node name="Wind" type="AudioStreamPlayer" parent="AudioAmbience" unique_id=429460764]
+stream = ExtResource("6_wind")
+volume_db = -20.0
+autoplay = true
+
+[node name="Music" type="AudioStreamPlayer" parent="AudioAmbience" unique_id=1937613259]
+stream = ExtResource("7_music")
+volume_db = -40.68
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=571491230]
+spawn_path = NodePath("..")
+spawn_limit = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=117875680]
+
+[node name="PostProcess" type="ColorRect" parent="CanvasLayer" unique_id=1811917204]
+material = SubResource("ShaderMaterial_pp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NetworkUI" type="Control" parent="CanvasLayer" unique_id=1583423003]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_netui")
+
+[node name="HostButton" type="Button" parent="CanvasLayer/NetworkUI" unique_id=301940869]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 120.0
+offset_bottom = 50.0
+text = "Host Game"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/NetworkUI" unique_id=1424039094]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 120.0
+offset_bottom = 90.0
+text = "Join Game"
+
+[node name="PauseMenu" parent="." unique_id=2108146992 instance=ExtResource("10_pause")]
+
+[connection signal="pressed" from="CanvasLayer/NetworkUI/HostButton" to="CanvasLayer/NetworkUI" method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/NetworkUI/JoinButton" to="CanvasLayer/NetworkUI" method="_on_join_pressed"]

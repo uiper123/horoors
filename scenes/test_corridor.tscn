@@ -1,0 +1,188 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://bi2cyqbv87g7x" path="res://scenes/test_world.gd" id="1_world"]
+[ext_resource type="PackedScene" path="res://entities/player/player.tscn" id="2_player"]
+[ext_resource type="Shader" uid="uid://dglauiivwrosi" path="res://ui/ps1_pp.gdshader" id="3_shader"]
+[ext_resource type="Script" uid="uid://bhowlgeqwhc0j" path="res://ui/network_ui.gd" id="4_netui"]
+[ext_resource type="Script" uid="uid://dme168xs34tmq" path="res://components/flickering_light.gd" id="5_flicker"]
+[ext_resource type="AudioStream" uid="uid://qse27chaamq4" path="res://assets/Rain-falling-with-thunder-relaxing-storm-sound-effect.mp3" id="6_rain"]
+[ext_resource type="AudioStream" uid="uid://bbvold0m0355m" path="res://assets/Free PSX Wind Ambience/Wind 3.wav" id="7_wind"]
+[ext_resource type="AudioStream" uid="uid://dfnjmcwh5443h" path="res://assets/Fog In The Dollhouse.mp3" id="8_music"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pp"]
+shader = ExtResource("3_shader")
+shader_parameter/color_depth = 15
+shader_parameter/dithering = true
+shader_parameter/resolution_scale = 1
+
+[sub_resource type="Environment" id="Environment_world"]
+background_mode = 1
+background_color = Color(0.02, 0.02, 0.05, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.05, 0.05, 0.1, 1)
+fog_enabled = true
+fog_light_color = Color(0.02, 0.02, 0.05, 1)
+fog_density = 0.1
+fog_sky_affect = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.3, 0.3, 0.3, 1)
+metallic = 0.2
+roughness = 0.8
+
+[node name="TestCorridor" type="Node3D"]
+script = ExtResource("1_world")
+player_scene = ExtResource("2_player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_world")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_color = Color(0.6, 0.6, 0.8, 1)
+light_energy = 0.1
+shadow_enabled = true
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="Corridor1" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+use_collision = true
+flip_faces = true
+size = Vector3(4, 3, 20)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="Room1" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -13)
+use_collision = true
+flip_faces = true
+size = Vector3(10, 4, 6)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="Corridor2" type="CSGBox3D" parent="Level"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 1.5, -13)
+use_collision = true
+flip_faces = true
+size = Vector3(4, 3, 12)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="Corridor3" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.5, -21)
+use_collision = true
+flip_faces = true
+size = Vector3(12, 3, 4)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="Room2" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.5, -21)
+use_collision = true
+flip_faces = true
+size = Vector3(8, 5, 8)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="Stairs" type="CSGBox3D" parent="Level"]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 14, 0.5, -19)
+use_collision = true
+size = Vector3(4, 1, 2)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="Pillar" type="CSGCylinder3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.5, -21)
+radius = 0.5
+height = 5.0
+sides = 6
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+light_color = Color(1, 0.9, 0.7, 1)
+light_energy = 0.8
+shadow_enabled = true
+omni_range = 6.0
+script = ExtResource("5_flicker")
+min_energy = 0.5
+max_energy = 1.0
+flicker_speed = 8.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -8)
+light_color = Color(1, 0.8, 0.8, 1)
+light_energy = 0.5
+shadow_enabled = true
+omni_range = 6.0
+script = ExtResource("5_flicker")
+min_energy = 0.2
+max_energy = 0.6
+flicker_speed = 2.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -13)
+light_color = Color(0.8, 0.9, 1, 1)
+light_energy = 0.8
+shadow_enabled = true
+omni_range = 8.0
+
+[node name="AudioAmbience" type="Node" parent="."]
+
+[node name="Rain" type="AudioStreamPlayer" parent="AudioAmbience"]
+stream = ExtResource("6_rain")
+volume_db = -10.0
+autoplay = true
+bus = &"SFX"
+
+[node name="Wind" type="AudioStreamPlayer" parent="AudioAmbience"]
+stream = ExtResource("7_wind")
+volume_db = -15.0
+autoplay = true
+bus = &"SFX"
+
+[node name="Music" type="AudioStreamPlayer" parent="AudioAmbience"]
+stream = ExtResource("8_music")
+volume_db = -5.0
+autoplay = true
+bus = &"Music"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+spawn_limit = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PostProcess" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_pp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NetworkUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_netui")
+
+[node name="HostButton" type="Button" parent="CanvasLayer/NetworkUI"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 120.0
+offset_bottom = 50.0
+text = "Host Game"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/NetworkUI"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 120.0
+offset_bottom = 90.0
+text = "Join Game"
+
+[connection signal="pressed" from="CanvasLayer/NetworkUI/HostButton" to="CanvasLayer/NetworkUI" method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/NetworkUI/JoinButton" to="CanvasLayer/NetworkUI" method="_on_join_pressed"]

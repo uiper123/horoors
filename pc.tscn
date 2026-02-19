@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://coupp4wowub6n"]
+
+[ext_resource type="PackedScene" uid="uid://dgo1rfqxb80sp" path="res://assets/pc.glb" id="1_ukbfy"]
+
+[node name="pc" unique_id=288046943 instance=ExtResource("1_ukbfy")]

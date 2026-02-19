@@ -1,0 +1,112 @@
+[gd_scene load_steps=2 format=3 uid="uid://pc_os_ui"]
+
+[ext_resource type="Script" path="res://entities/props/pc/pc_os_ui.gd" id="1_script"]
+
+[node name="PCOSUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="BootScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="BootScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LogLabel" type="RichTextLabel" parent="BootScreen"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 600.0
+offset_bottom = 400.0
+theme_override_colors/default_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "> System Init..."
+
+[node name="ProgressBar" type="ProgressBar" parent="BootScreen"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -100.0
+offset_right = -50.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+step = 1.0
+
+[node name="Desktop" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Wallpaper" type="ColorRect" parent="Desktop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.2, 0.4, 1)
+
+[node name="TaskBar" type="Panel" parent="Desktop"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StartButton" type="Button" parent="Desktop/TaskBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -15.0
+offset_right = 80.0
+offset_bottom = 15.0
+grow_vertical = 2
+text = "Start"
+
+[node name="TimeLabel" type="Label" parent="Desktop/TaskBar"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -11.5
+offset_right = -10.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "12:00"
+horizontal_alignment = 2
+
+[connection signal="pressed" from="Desktop/TaskBar/StartButton" to="." method="_on_shutdown_pressed"]
